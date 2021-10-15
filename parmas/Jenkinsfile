@@ -1,0 +1,29 @@
+pipeline {
+  agent any
+  parameters {
+        booleanParam(name: 'PYTHON2_DEPLOY', defaultValue: true, description: 'Branch to Deploy, paste the desired branch')
+        text(
+            defaultValue: '''
+            this is a multi-line 
+            string parameter example
+            ''', 
+            name: 'PYTHON2_SERVICES'
+        )
+    }
+  tools {}
+
+  options {
+    timeout(time: 2, unit: 'MINUTES')
+  }
+
+  stages {
+    stage('Print message') {
+      steps {
+        script {
+            def test = params.PYTHON2_SERVICES.tokenize( '\n' )
+            echo "Some message ${test}"
+        }
+      }
+    }
+  }
+}
