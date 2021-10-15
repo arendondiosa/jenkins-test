@@ -1,11 +1,15 @@
-
+python2_service = """
+service1
+service2
+service3
+"""
 
 pipeline {
   agent any
   parameters {
         booleanParam(name: 'PYTHON2_DEPLOY', defaultValue: true, description: 'Branch to Deploy, paste the desired branch')
         text(
-            defaultValue: 'this is a multi-line\nstring parameter example',
+            defaultValue: python2_service,
             name: 'PYTHON2_SERVICES'
         )
     }
