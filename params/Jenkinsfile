@@ -1,12 +1,11 @@
+
+
 pipeline {
   agent any
   parameters {
         booleanParam(name: 'PYTHON2_DEPLOY', defaultValue: true, description: 'Branch to Deploy, paste the desired branch')
         text(
-            defaultValue: '''
-            this is a multi-line 
-            string parameter example
-            ''', 
+            defaultValue: 'this is a multi-line\nstring parameter example',
             name: 'PYTHON2_SERVICES'
         )
     }
