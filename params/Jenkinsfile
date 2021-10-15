@@ -10,8 +10,6 @@ pipeline {
             name: 'PYTHON2_SERVICES'
         )
     }
-  tools {}
-
   options {
     timeout(time: 2, unit: 'MINUTES')
   }
