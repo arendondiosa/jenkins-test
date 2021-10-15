@@ -7,22 +7,34 @@ service3
 pipeline {
   agent any
   parameters {
-        booleanParam(name: 'PYTHON2_DEPLOY', defaultValue: true, description: 'Branch to Deploy, paste the desired branch')
-        text(
-            defaultValue: python2_service,
-            name: 'PYTHON2_SERVICES'
-        )
-    }
+    booleanParam(name: 'PYTHON2_DEPLOY', defaultValue: true, description: 'Branch to Deploy, paste the desired branch')
+    text(
+      defaultValue: python2_service,
+      name: 'PYTHON2_SERVICES'
+    )
+    text(
+      defaultValue: '',
+      name: 'TEST_PARAM'
+    )
+  }
   options {
     timeout(time: 2, unit: 'MINUTES')
   }
 
   stages {
+    stage('Update params') {
+      steps {
+        script {
+          params.PYTHON2_SERVICES = 'Test changing value'
+        }
+      }
+    }
     stage('Print message') {
       steps {
         script {
-            def test = params.PYTHON2_SERVICES.tokenize( '\n' )
-            echo "Some message ${test}"
+          def test = params.PYTHON2_SERVICES.tokenize( '\n' )
+          echo "Some message ${test}"
+          echo "Value update ${params.TEST_PARAM}"
         }
       }
     }
